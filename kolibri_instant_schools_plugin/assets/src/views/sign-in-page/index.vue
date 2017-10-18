@@ -72,22 +72,9 @@
         </a>
       </form>
 
-      <core-modal
-        v-if="passwordResetModalVisble"
-        :title="$tr('resetPasswordModalHeader')"
-        @cancel="passwordResetModalVisble = false"
-      >
-        <p>
-          Instructions will be sent to your phone.
-        </p>
-        <k-textbox
-          :label="$tr('resetPasswordPhoneNumberPrompt')"
-          type="tel"
-          autocomplete="tel"
-        />
-      </core-modal>
-
       <div class="divider"></div>
+
+      <reset-password-modal :show="passwordResetModalVisble" />
 
       <p class="login-text no-account">{{ $tr('noAccount') }}</p>
       <div id="btn-group">
@@ -117,11 +104,11 @@
   import { LoginErrors } from 'kolibri.coreVue.vuex.constants';
   import kButton from 'kolibri.coreVue.components.kButton';
   import kTextbox from 'kolibri.coreVue.components.kTextbox';
-  import coreModal from 'kolibri.coreVue.components.coreModal';
   import logo from 'kolibri.coreVue.components.logo';
   import uiAutocompleteSuggestion from 'keen-ui/src/UiAutocompleteSuggestion';
   import uiAlert from 'keen-ui/src/UiAlert';
   import languageSwitcher from 'kolibri.coreVue.components.languageSwitcher';
+  import resetPasswordModal from '../reset-password-modal';
 
   export default {
     name: 'signInPage',
@@ -145,8 +132,8 @@
     components: {
       kButton,
       kTextbox,
-      coreModal,
       logo,
+      resetPasswordModal,
       uiAutocompleteSuggestion,
       uiAlert,
       languageSwitcher,
