@@ -67,14 +67,14 @@
           :disabled="busy"
         />
 
-        <a @click="openPasswordResetModal()" role="link" href="#" id="password-reset">
+        <a @click="openPasswordResetModal" role="link" href="#" id="password-reset">
           {{ $tr('resetPasswordPrompt') }}
         </a>
       </form>
 
       <div class="divider"></div>
 
-      <reset-password-modal :show="passwordResetModalVisble" />
+      <reset-password-modal :show="passwordResetModalVisble" @close="closePasswordResetModal"/>
 
       <p class="login-text no-account">{{ $tr('noAccount') }}</p>
       <div id="btn-group">
@@ -309,6 +309,9 @@
       },
       openPasswordResetModal() {
         this.passwordResetModalVisble = true;
+      },
+      closePasswordResetModal() {
+        this.passwordResetModalVisble = false;
       },
     },
     vuex: {
