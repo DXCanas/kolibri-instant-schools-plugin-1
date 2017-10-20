@@ -67,7 +67,28 @@
           :primary="true"
           :disabled="busy"
         />
+
+        <a @click="openPasswordResetModal()" role="link" href="#" id="password-reset">
+          {{ $tr('resetPasswordPrompt') }}
+        </a>
       </form>
+
+      <core-modal
+        v-if="passwordResetModalVisble"
+        :title="$tr('resetPasswordModalHeader')"
+        @cancel="passwordResetModalVisble = false"
+      >
+        <p>
+          Instructions will be sent to your phone.
+        </p>
+        <k-textbox
+          :label="$tr('resetPasswordPhoneNumberPrompt')"
+          type="tel"
+          autocomplete="tel"
+        />
+        <!-- <iframe class="reset" src="/content/databases/reset.txt"></iframe> -->
+      </core-modal>
+
       <div class="divider"></div>
 
       <p class="login-text no-account">{{ $tr('noAccount') }}</p>
@@ -98,6 +119,7 @@
   import { LoginErrors } from 'kolibri.coreVue.vuex.constants';
   import kButton from 'kolibri.coreVue.components.kButton';
   import kTextbox from 'kolibri.coreVue.components.kTextbox';
+  import coreModal from 'kolibri.coreVue.components.coreModal';
   import logo from 'kolibri.coreVue.components.logo';
   import uiAutocompleteSuggestion from 'keen-ui/src/UiAutocompleteSuggestion';
   import uiAlert from 'keen-ui/src/UiAlert';
@@ -118,10 +140,14 @@
       poweredBy: 'Kolibri {version}',
       required: 'This field is required',
       requiredForCoachesAdmins: 'Password is required for coaches and admins',
+      resetPasswordPrompt: 'Reset your password',
+      resetPasswordModalHeader: 'Reset password',
+      resetPasswordPhoneNumberPrompt: 'Reset password',
     },
     components: {
       kButton,
       kTextbox,
+      coreModal,
       logo,
       uiAutocompleteSuggestion,
       uiAlert,
@@ -137,6 +163,7 @@
       usernameBlurred: false,
       passwordBlurred: false,
       formSubmitted: false,
+      passwordResetModalVisble: false, // are we giving this a route?
     }),
     computed: {
       simpleSignIn() {
@@ -294,6 +321,9 @@
         } else if (this.passwordIsInvalid) {
           this.$refs.password.focus();
         }
+      },
+      openPasswordResetModal() {
+        this.passwordResetModalVisble = true;
       },
     },
     vuex: {
