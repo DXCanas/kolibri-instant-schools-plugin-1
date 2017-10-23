@@ -67,14 +67,12 @@
           :disabled="busy"
         />
 
-        <a @click="openPasswordResetModal" role="link" href="#" id="password-reset">
+        <a @click="openPasswordResetModal" role="link" href="#" class="reset-pw">
           {{ $tr('resetPasswordPrompt') }}
         </a>
       </form>
 
       <div class="divider"></div>
-
-      <reset-password-modal :show="passwordResetModalVisble" @close="closePasswordResetModal"/>
 
       <p class="login-text no-account">{{ $tr('noAccount') }}</p>
       <div id="btn-group">
@@ -90,6 +88,12 @@
     <div class="footer-row">
       <language-switcher :footer="true" class="footer-cell"/>
     </div>
+
+    <reset-password-modal
+      v-if="passwordResetModalVisble"
+      @close="closePasswordResetModal"
+    />
+
   </div>
 
 </template>
@@ -126,8 +130,6 @@
       required: 'This field is required',
       requiredForCoachesAdmins: 'Password is required for coaches and admins',
       resetPasswordPrompt: 'Reset your password',
-      resetPasswordModalHeader: 'Reset password',
-      resetPasswordPhoneNumberPrompt: 'Reset password',
     },
     components: {
       kButton,
@@ -456,5 +458,11 @@
   .alert
     // Needed since alert has transparent background-color
     background-color: white
+
+  .reset-pw
+    margin-top: 1.5em
+    margin-bottom: -1em
+    display: block
+    text-align: center
 
 </style>
