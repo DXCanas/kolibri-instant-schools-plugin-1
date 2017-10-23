@@ -2,7 +2,6 @@
 
   <div class="wrapper-table">
     <div class="main-row"><div id="main-cell">
-      <!-- swap core logo? -->
       <img class="logo" src="../img/instant-schools-logo.png">
       <h1 class="login-text title">{{ $tr('signInHeader') }}</h1>
       <form class="login-form" ref="form" @submit.prevent="signIn">
@@ -86,7 +85,6 @@
           type="tel"
           autocomplete="tel"
         />
-        <!-- <iframe class="reset" src="/content/databases/reset.txt"></iframe> -->
       </core-modal>
 
       <div class="divider"></div>
@@ -163,7 +161,7 @@
       usernameBlurred: false,
       passwordBlurred: false,
       formSubmitted: false,
-      passwordResetModalVisble: false, // are we giving this a route?
+      passwordResetModalVisble: false,
     }),
     computed: {
       simpleSignIn() {
